@@ -154,7 +154,7 @@ HTMLWidgets.widget({
             .attr("display", function(d) { return d.depth ? null : "none"; })
             .attr("d", arc)
             .attr("fill-rule", "evenodd")
-            .style("fill", function(d) { return colors(d.name); })
+            .style("fill", function(d) { return colors(d.label); })
             .style("opacity", 1)
             .on("mouseover", mouseover)
             .on("click", click);
@@ -205,7 +205,7 @@ HTMLWidgets.widget({
             .style("top",((height - 70)/2) + "px")
             .style("width",width + "px")
             .html(explanationString);
-
+        percentageString = percentageString + ", confidence: " + d.confidence
         var sequenceArray = getAncestors(d);
 
         chart._selection = sequenceArray.map(
@@ -328,7 +328,7 @@ HTMLWidgets.widget({
 
           entering.append("polygon")
               .style("z-index",function(d,i) { return(999-i); })
-              .style("fill", function(d) { return colors(d.name); });
+              .style("fill", function(d) { return colors(d.label); });
 
           entering.append("text")
               .attr("x", b.t + 2)
@@ -396,7 +396,7 @@ HTMLWidgets.widget({
         } else {
           entering.append("polygon")
               .attr("points", breadcrumbPoints)
-              .style("fill", function(d) { return colors(d.name); });
+              .style("fill", function(d) { return colors(d.label); });
 
           entering.append("text")
               .attr("x", (b.w + b.t) / 2)
@@ -433,7 +433,7 @@ HTMLWidgets.widget({
 
         // Dimensions of legend item: width, height, spacing, radius of rounded rect.
         var li = {
-          w: 75, h: 30, s: 3, r: 3
+          w: 100, h: 30, s: 3, r: 3
         };
 
         //  if legend is provided in the option, we will overwrite
@@ -455,7 +455,7 @@ HTMLWidgets.widget({
                 return x.options.legendOrder;
               } else {
                 // get sorted by top level
-                sortedname = d3.set(Object.keys(d3.nest().key(function(d){return d.name}).rollup(function(d){return d[0].value}).map(json.children) ))
+                sortedname = d3.set(Object.keys(d3.nest().key(function(d){return d.label}).rollup(function(d){return d[0].value}).map(json.children) ))
                 // add any other missing
                 colors.domain()
                   .filter(function(d){
