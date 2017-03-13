@@ -162,13 +162,13 @@ breadcrumbs <- function(branchlist, elementId = NULL){
 }
 
 #' @export
-breadcrumbOutput <- function(outputId, width = '100%', height = '400px'){
+breadcrumbsOutput <- function(outputId, width = '100%', height = '400px'){
   shinyWidgetOutput(outputId, 'breadcrumbs', width, height, package = 'sunburstR')
 }
 
 #' @rdname sunburst-shiny
 #' @export
-renderBreadcrumb <- function(expr, env = parent.frame(), quoted = FALSE) {
+renderBreadcrumbs <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   shinyRenderWidget(expr, breadcrumbOutput, env, quoted = TRUE)
 }
