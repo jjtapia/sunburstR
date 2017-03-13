@@ -170,5 +170,5 @@ breadcrumbsOutput <- function(outputId, width = '100%', height = '400px'){
 #' @export
 renderBreadcrumbs <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
-  shinyRenderWidget(expr, breadcrumbOutput, env, quoted = TRUE)
+  shinyRenderWidget(expr, breadcrumbsOutput, env, quoted = TRUE)
 }
