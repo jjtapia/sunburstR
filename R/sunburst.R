@@ -144,3 +144,31 @@ sunburst_html <- function(id, style, class, ...){
     d3r::d3_dep_v3()
   )
 }
+
+breadcrumbs <- function(branchlist, elementId = NULL){
+  sizingPolicy <- htmlwidgets::sizingPolicy(browser.fill=TRUE)
+   # create widget
+   x = list(
+        branchlist = branchlist
+ )
+  htmlwidgets::createWidget(
+    name = 'breadcrumbs',
+    x,
+    package = 'sunburstR',
+    elementId = elementId,
+    sizingPolicy
+  )
+
+}
+
+#' @export
+breadcrumbOutput <- function(outputId, width = '100%', height = '400px'){
+  shinyWidgetOutput(outputId, 'breadcrumbs', width, height, package = 'sunburstR')
+}
+
+#' @rdname sunburst-shiny
+#' @export
+renderBreadcrumb <- function(expr, env = parent.frame(), quoted = FALSE) {
+  if (!quoted) { expr <- substitute(expr) } # force quoted
+  shinyRenderWidget(expr, breadcrumbOutput, env, quoted = TRUE)
+}
