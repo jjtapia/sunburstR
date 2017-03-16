@@ -193,7 +193,7 @@ HTMLWidgets.widget({
         } else if(x.options.count){
           explanationString = countString;
         }
-        explanationString = d.confidence
+        explanationString = d.confidence.toFixed(3)
         //if explanation defined in R then use this instead
         if(x.options.explanation !== null){
           explanationString = x.options.explanation.bind(totalSize)(d);
